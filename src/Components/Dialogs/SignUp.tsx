@@ -1,6 +1,7 @@
 "use client";
 
 import axios, { AxiosResponse } from "axios";
+import { X } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
@@ -11,6 +12,7 @@ const SignUp = () => {
       toast.error("Please fill all the fields");
       return;
     }
+    (document.getElementById("signup") as HTMLDialogElement).close();
     const response = axios.post("/api/auth/signup", { user });
     toast.promise(response, {
       loading: "Signing Up...",
@@ -24,12 +26,22 @@ const SignUp = () => {
   return (
     <dialog id="signup" className="modal">
       <div className="modal-box">
-        <div className="card w-full max-w-md shadow-lg bg-base-300 p-10 text-base-content">
+        <div className="w-full flex items-center justify-end">
+          <button
+            className="btn btn-ghost ml-auto w-16 h-auto"
+            onClick={() =>
+              (document.getElementById("signup") as HTMLDialogElement).close()
+            }
+          >
+            <X className="w-6 h-6" />
+          </button>
+        </div>
+        <div className="card w-full bg-base-300 px-10 py-10 text-base-content">
           <h1 className="text-2xl font-bold text-primary text-center pb-7">
-            SignUp to WebShield
+            SignUp to CyberScout
           </h1>
-          <div className="flex flex-col items-center justify-center px-7 py-4 gap-4 w-full border border-base-content ring rounded-lg">
-            <label className="form-control w-full max-w-xs">
+          <div className="flex flex-col items-center justify-center px-7 py-4 gap-4 w-full border border-base-content rounded-lg">
+            <label className="form-control w-full">
               <div className="label">
                 <span className="label-text">Email</span>
               </div>
@@ -58,7 +70,7 @@ const SignUp = () => {
 
             {/* Submit Button */}
             <button className="btn btn-primary w-full" onClick={handleSignUp}>
-              SignUp
+              Login Up
             </button>
           </div>
 
@@ -80,7 +92,7 @@ const SignUp = () => {
                 }}
                 className="text-primary font-bold hover:underline"
               >
-                Sign Up
+                Sign in
               </button>
             </p>
           </div>

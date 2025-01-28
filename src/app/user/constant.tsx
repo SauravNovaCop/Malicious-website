@@ -25,9 +25,4 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
     path: "/user/history",
     icon: <History width="24" height="24" />,
   },
-  {
-    title: "Settings",
-    path: "/user/settings",
-    icon: <Settings width="24" height="24" />,
-  },
 ];

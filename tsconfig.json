@@ -27,7 +27,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/app/api/analyze-urls/worker.js"
+    "migrations/2_deploy_contracts.js"
   ],
   "exclude": ["node_modules"]
 }

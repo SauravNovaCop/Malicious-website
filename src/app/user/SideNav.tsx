@@ -74,7 +74,9 @@ const SideNav = ({ children }: { children: React.ReactNode }) => {
             </div>
 
             <div className="flex-1 justify-between lg:hidden px-2">
-              <h1 className="text-xl font-bold text-base-content">Gamanika</h1>
+              <h1 className="text-xl font-bold text-base-content">
+                CyberScout
+              </h1>
               <ThemeToggler />
             </div>
 
@@ -112,18 +114,12 @@ const SideNav = ({ children }: { children: React.ReactNode }) => {
                       </div>
                       <hr className="my-2 border-base-content" />
                       <div className="flex flex-col">
-                        <button
-                          onClick={() => router.push("/account")}
+                        <Link
+                          href="/account"
                           className="text-left px-4 py-2 text-base text-dark hover:bg-base-200 transition duration-200"
                         >
                           My Account
-                        </button>
-                        <button
-                          onClick={() => router.push("/profile")}
-                          className="text-left px-4 py-2 text-base text-dark hover:bg-base-200 transition duration-200"
-                        >
-                          Profile
-                        </button>
+                        </Link>
                         <button
                           onClick={handleLogout}
                           className="text-left px-4 py-2 text-base text-dark hover:bg-base-200 transition duration-200"
@@ -222,14 +218,14 @@ const SideNav = ({ children }: { children: React.ReactNode }) => {
           ></label>
           <div className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
             <Link
-              href="/teachers/dashboard"
+              href="/user/dashboard"
               className="flex h-16 w-full flex-row items-center justify-center space-x-3 border-b border-base-content md:justify-start md:px-6"
             >
               <span className="h-7 w-7 rounded-lg bg-base-200">
                 <ShieldCheck size={28} />
               </span>
               <span className="text-xl font-bold text-base-content">
-                Gamanika
+                CyberScout
               </span>
             </Link>
             <div className="flex flex-col space-y-2 mt-10 md:px-6">

@@ -4,7 +4,7 @@ const ThemeController = () => {
   return (
     <div className="btn btn-ghost mx-2">
       <label className="swap swap-rotate">
-        <input type="checkbox" className="theme-controller" value="valentine" />
+        <input type="checkbox" className="theme-controller" value="sunset" />
 
         {/* sun icon */}
         <Sun className="swap-off" size={30} />

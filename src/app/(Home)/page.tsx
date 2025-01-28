@@ -2,7 +2,7 @@
 
 export default function Home() {
   return (
-    <div className="hero bg-base-300 h-[57vh]">
+    <div className="hero bg-base-300 h-[87.5vh]">
       <div className="hero-content text-center w-[50vw]">
         <div className="w-full">
           <h1 className="text-5xl font-bold text-primary">

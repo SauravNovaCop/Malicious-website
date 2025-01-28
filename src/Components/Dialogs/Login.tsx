@@ -1,5 +1,6 @@
 "use client";
 import axios from "axios";
+import { X } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -9,6 +10,7 @@ const Login: React.FC = () => {
   const [user, setUser] = useState({ email: "", password: "" });
   const router = useRouter();
   const handleLogin = () => {
+    (document.getElementById("login") as HTMLDialogElement).close();
     if (user.email.length === 0 || user.password.length === 0) {
       toast.error("Please fill all the fields");
       return;
@@ -26,11 +28,21 @@ const Login: React.FC = () => {
   return (
     <dialog id="login" className="modal">
       <div className="modal-box">
+        <div className="w-full flex items-center justify-end">
+          <button
+            className="btn btn-ghost w-16 h-auto"
+            onClick={() =>
+              (document.getElementById("signup") as HTMLDialogElement).close()
+            }
+          >
+            <X className="w-6 h-6" />
+          </button>
+        </div>
         <div className="card w-full max-w-md shadow-lg bg-base-300 p-10 text-base-content">
           <h1 className="text-2xl font-bold text-primary text-center pb-7">
-            Login to WebShield
+            Login to CyberScout
           </h1>
-          <div className="flex flex-col items-center justify-center px-7 py-4 gap-4 w-full border border-base-content ring rounded-lg">
+          <div className="flex flex-col items-center justify-center px-7 py-4 gap-4 w-full border border-base-content rounded-lg">
             <label className="form-control w-full max-w-xs">
               <div className="label">
                 <span className="label-text">Email</span>

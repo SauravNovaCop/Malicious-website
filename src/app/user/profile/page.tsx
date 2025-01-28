@@ -4,14 +4,8 @@ import Image from "next/image";
 
 const UserProfile = () => {
   const { user } = useUserContext();
-  // const [isEditing, setIsEditing] = useState(false);
 
   if (!user) return <>Loading...</>;
-
-  // const handleEdit = () => {
-  //   setIsEditing(true);
-  //   // You can implement modal functionality or redirect to an edit page here
-  // };
 
   return (
     <div className="bg-base-200 flex items-center justify-center mt-10">
@@ -21,44 +15,26 @@ const UserProfile = () => {
           <div className="avatar">
             <div className="w-24 h-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
               <Image
-                src={user.profileImageUrl}
+                src="https://picsum.photos/200/300"
                 alt="User Avatar"
                 height={28}
                 width={28}
+                className="rounded-full"
               />
             </div>
           </div>
 
           {/* User Info */}
           <div className="text-center">
-            <h2 className="text-2xl font-bold">{user.fullName}</h2>
-            <p className="text-gray-500">{user.email}</p>
+            <h2 className="text-2xl font-bold uppercase">{user.email}</h2>
           </div>
 
           {/* User Details */}
           <div className="w-full mt-6 space-y-4">
             <div className="flex justify-between">
-              <span className="font-semibold">Full Name:</span>
-              <span>{user.fullName}</span>
-            </div>
-            <div className="flex justify-between">
               <span className="font-semibold">Email:</span>
               <span>{user.email}</span>
             </div>
-            <div className="flex justify-between">
-              <span className="font-semibold">User Name:</span>
-              <span>{user.username || "Not Provided"}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="font-semibold">Total Number of Vehicle:</span>
-              <span>{user.vehicle.length || "Not Provided"}</span>
-            </div>
-          </div>
-
-          {/* Update Profile Button */}
-          <div className="card-actions mt-6">
-            {/* onClick={handleEdit} */}
-            <button className="btn btn-primary">Update Profile</button>
           </div>
         </div>
       </div>

@@ -45,11 +45,6 @@ const Header: React.FC = () => {
                 Check URL
               </Link>
             </li>
-            <li>
-              <Link href="/contact" className="btn btn-ghost">
-                Contact
-              </Link>
-            </li>
             <div className="mt-4 flex flex-col gap-2">
               <button className="btn btn-primary">Login</button>
               <button className="btn btn-secondary">Sign Up</button>
@@ -95,11 +90,6 @@ const Header: React.FC = () => {
           <li>
             <Link href="/check-url" className="hover:text-primary-focus">
               Check URL
-            </Link>
-          </li>
-          <li>
-            <Link href="/contact" className="hover:text-primary-focus">
-              Contact
             </Link>
           </li>
         </ul>

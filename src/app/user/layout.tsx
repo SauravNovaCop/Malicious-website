@@ -47,7 +47,7 @@ function AppContent({ children }: { children: React.ReactNode }) {
     getUserFromToken();
   }, [router, setUser]);
   return (
-    <html lang="en" data-theme="night">
+    <html lang="en" data-theme="forest">
       <head>
         <title>CyberScout | Click with confidence</title>
       </head>
