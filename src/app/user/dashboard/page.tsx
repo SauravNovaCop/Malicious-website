@@ -437,7 +437,7 @@ const Dashboard = () => {
                               key={model}
                             >
                               <strong>{model}:</strong> {result.prediction} (
-                              {result.malicious_percent.toFixed(2)}%)
+                              {100 - result.malicious_percent.toFixed(2)}%)
                             </p>
                           );
                         })}
