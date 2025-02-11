@@ -5,6 +5,7 @@ import UserDashboardSkeleton from "@/Components/Skeletons/UserDashboard";
 import { useState } from "react";
 import axios, { AxiosResponse } from "axios";
 import toast from "react-hot-toast";
+import { TrashIcon } from "lucide-react";
 
 const Dashboard = () => {
   const { user } = useUserContext();
@@ -126,21 +127,6 @@ const Dashboard = () => {
     printWindow?.print();
   };
 
-  const getSafetyLabel = (prediction: string) => {
-    switch (prediction) {
-      case "benign":
-        return { label: "Benign", className: "btn-success" };
-      case "defacement":
-        return { label: "Defacement", className: "btn-error" };
-      case "phishing":
-        return { label: "Phishing", className: "btn-warning" };
-      case "malware":
-        return { label: "Malware", className: "btn-error" };
-      default:
-        return { label: "Unknown", className: "btn-secondary" };
-    }
-  };
-
   const featureLabels = [
     "Using IP",
     "Long URL",
@@ -180,6 +166,18 @@ const Dashboard = () => {
         <UserDashboardSkeleton />
       </SideNavSkeleton>
     );
+  const handleDeleteURL = (id: string) => {
+    const response = axios.delete(`/api/delete-url?id=${id}`);
+    toast.promise(response, {
+      loading: "Deleting URL...",
+      success: () => {
+        return "URL deleted successfully!";
+      },
+      error: () => {
+        return "Failed to delete the URL due to an internal error.";
+      },
+    });
+  };
 
   return (
     <div className="bg-base-100 min-h-screen p-6">
@@ -215,6 +213,13 @@ const Dashboard = () => {
                           item.createdAt
                         ).toLocaleString()}`}
                     </span>
+                    <button
+                      className="btn btn-error"
+                      title="Delete URL"
+                      onClick={() => handleDeleteURL(item._id)}
+                    >
+                      <TrashIcon size={24} />
+                    </button>
                   </div>
                   <div className="mt-4">
                     <p
@@ -422,12 +427,16 @@ const Dashboard = () => {
                           },
                           { model: "ResMLP", result: result.data.resmlp },
                         ].map(({ model, result }) => {
-                          const { label, className } = getSafetyLabel(
-                            result.prediction
-                          );
                           return (
-                            <p className={`btn ${className}`} key={model}>
-                              <strong>{model}:</strong> {label} (
+                            <p
+                              className={`btn btn-${
+                                result.prediction === "Malicious"
+                                  ? "error"
+                                  : "success"
+                              }`}
+                              key={model}
+                            >
+                              <strong>{model}:</strong> {result.prediction} (
                               {result.malicious_percent.toFixed(2)}%)
                             </p>
                           );

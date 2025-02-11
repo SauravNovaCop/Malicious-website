@@ -1,6 +1,6 @@
 "use client";
 import axios from "axios";
-import { X } from "lucide-react";
+import { Eye, EyeOff, X } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 
 const Login: React.FC = () => {
   const [user, setUser] = useState({ email: "", password: "" });
+  const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
   const handleLogin = () => {
     (document.getElementById("login") as HTMLDialogElement).close();
@@ -22,7 +23,7 @@ const Login: React.FC = () => {
         router.push("/user/dashboard");
         return "Logged In Successfully";
       },
-      error: "Failed to Log In",
+      error: (err) => err.response.data.message,
     });
   };
   return (
@@ -32,7 +33,7 @@ const Login: React.FC = () => {
           <button
             className="btn btn-ghost w-16 h-auto"
             onClick={() =>
-              (document.getElementById("signup") as HTMLDialogElement).close()
+              (document.getElementById("login") as HTMLDialogElement).close()
             }
           >
             <X className="w-6 h-6" />
@@ -43,43 +44,52 @@ const Login: React.FC = () => {
             Login to CyberScout
           </h1>
           <div className="flex flex-col items-center justify-center px-7 py-4 gap-4 w-full border border-base-content rounded-lg">
-            <label className="form-control w-full max-w-xs">
+            {/* Email Field */}
+            <label className="input input-bordered flex items-center gap-2 w-full">
               <div className="label">
                 <span className="label-text">Email</span>
               </div>
               <input
                 type="text"
                 placeholder="Enter Your Email"
-                className="input input-bordered input-primary w-full max-w-xs"
+                className="grow w-full"
                 value={user.email}
                 onChange={(e) => setUser({ ...user, email: e.target.value })}
               />
             </label>
 
             {/* Password Field */}
-            <label className="form-control w-full max-w-xs">
+            <label className="input input-bordered flex items-center gap-2 w-full">
               <div className="label">
                 <span className="label-text">Password</span>
               </div>
               <input
-                type="text"
-                placeholder="Enter Your Password"
-                className="input input-bordered input-primary w-full max-w-xs"
+                type={showPassword ? "text" : "password"}
+                name="password"
                 value={user.password}
-                onChange={(e) => setUser({ ...user, password: e.target.value })}
+                onChange={(e) =>
+                  setUser({
+                    ...user,
+                    password: e.target.value,
+                  })
+                }
+                className="grow"
+                placeholder="Enter Password"
+                required
               />
+              <span
+                className="opacity-70 cursor-pointer text-base-content"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </span>
             </label>
+
             <div className="flex justify-around items-center w-full">
               <label className="flex items-center gap-2 cursor-pointer">
                 <input type="checkbox" className="checkbox checkbox-primary" />
                 <span className="label-text">Remember Me</span>
               </label>
-              <Link
-                href="/forgot-password"
-                className="text-sm text-primary hover:underline"
-              >
-                Forgot Password?
-              </Link>
             </div>
 
             {/* Submit Button */}

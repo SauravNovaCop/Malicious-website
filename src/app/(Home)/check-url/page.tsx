@@ -22,6 +22,7 @@ const CheckURL = () => {
         console.log(res.data);
         const { features, random_forest, naive_bayes, resmlp } = res.data.data;
         setAnalysisResult({ features, random_forest, naive_bayes, resmlp });
+        console.log(analysisResult);
         return "URL analysis completed successfully!";
       },
       error: () => {
@@ -62,21 +63,6 @@ const CheckURL = () => {
     "Links Pointing To Page",
     "Stats Report",
   ];
-
-  const getSafetyLabel = (prediction: string) => {
-    switch (prediction) {
-      case "benign":
-        return { label: "Benign", className: "btn-success" };
-      case "defacement":
-        return { label: "Defacement", className: "btn-error" };
-      case "phishing":
-        return { label: "Phishing", className: "btn-warning" };
-      case "malware":
-        return { label: "Malware", className: "btn-error" };
-      default:
-        return { label: "Unknown", className: "btn-secondary" };
-    }
-  };
 
   return (
     <div className="bg-base-100 text-base-content py-10 px-6">
@@ -125,7 +111,7 @@ const CheckURL = () => {
             <h3 className="text-xl font-bold mb-4">Analysis Results: {url}</h3>
             <table className="table-auto w-full border-collapse border border-base-content/80">
               <thead>
-                <tr className="bg-accent">
+                <tr className="bg-accent text-accent-content">
                   <th className="border border-accent-content px-4 py-2">
                     Feature
                   </th>
@@ -151,7 +137,7 @@ const CheckURL = () => {
             <h4 className="text-2xl font-semibold mt-6 mb-2">
               Overall Results:
             </h4>
-            <div className="space-x-2 w-full flex flex-wrap justify-center">
+            <div className="space-x-2 w-full flex flex-wrap justify-center space-y-4 lg:space-y-0">
               {[
                 {
                   model: "Random Forest",
@@ -160,10 +146,14 @@ const CheckURL = () => {
                 { model: "Naive Bayes", result: analysisResult.naive_bayes },
                 { model: "ResMLP", result: analysisResult.resmlp },
               ].map(({ model, result }) => {
-                const { label, className } = getSafetyLabel(result.prediction);
                 return (
-                  <p className={`btn ${className}`} key={model}>
-                    <strong>{model}:</strong> {label} (
+                  <p
+                    className={`btn btn-${
+                      result.prediction === "Malicious" ? "error" : "success"
+                    }`}
+                    key={model}
+                  >
+                    <strong>{model}:</strong> {result.prediction} (
                     {result.malicious_percent.toFixed(2)}%)
                   </p>
                 );

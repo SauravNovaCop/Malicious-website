@@ -8,11 +8,9 @@ export async function POST(req: NextRequest) {
   try {
     const { url }: { url: string } = await req.json();
     const newURL = url.trim();
-
     const pythonScriptPath = "python/run.py";
-
     const { stdout, stderr } = await execPromise(
-      `python "${pythonScriptPath}" "${newURL}"`
+      `py -3.12 "${pythonScriptPath}" "${newURL}"`
     );
     console.log(`stdout: ${stdout}`);
     return NextResponse.json(

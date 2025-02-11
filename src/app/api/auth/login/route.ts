@@ -13,9 +13,7 @@ export async function POST(req: NextRequest) {
   try {
     const userExist = await User.findOne({ email: user.email });
     if (!userExist) {
-      return NextResponse.json({
-        message: "User not found",
-      });
+      return NextResponse.json({ message: "User not found" }, { status: 404 });
     }
     const match = await bcrypt.compare(user.password, userExist.password);
     if (match) {
@@ -39,9 +37,10 @@ export async function POST(req: NextRequest) {
 
       return response;
     } else {
-      return NextResponse.json({
-        message: "Password incorrect",
-      });
+      return NextResponse.json(
+        { message: "Invalid Credentials" },
+        { status: 400 }
+      );
     }
   } catch (err) {
     console.error("Error logging in user:", err);
