@@ -22,7 +22,6 @@ const CheckURL = () => {
         console.log(res.data);
         const { features, random_forest, naive_bayes, resmlp } = res.data.data;
         setAnalysisResult({ features, random_forest, naive_bayes, resmlp });
-        console.log(analysisResult);
         return "URL analysis completed successfully!";
       },
       error: () => {
