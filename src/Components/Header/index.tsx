@@ -68,20 +68,26 @@ const Header: React.FC = () => {
       </div>
       <div className="navbar-end space-x-3">
         {[
-          { name: "Login", link: "login", color: "btn-secondary" },
-          { name: "Sign Up", link: "signup", color: "btn-accent" },
+          {
+            name: "Login",
+            link: "login",
+            color: "btn-secondary",
+            href: "/login",
+          },
+          {
+            name: "Sign Up",
+            link: "signup",
+            color: "btn-accent",
+            href: "/signup",
+          },
         ].map((item) => (
-          <button
+          <Link
+            href={item.href}
             key={item.name}
             className={`btn ${item.color} hidden lg:flex items-center justify-center`}
-            onClick={() => {
-              (
-                document.getElementById(item.link) as HTMLDialogElement
-              ).showModal();
-            }}
           >
             {item.name}
-          </button>
+          </Link>
         ))}
         <Login />
         <SignUp />
